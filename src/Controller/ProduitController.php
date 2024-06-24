@@ -14,6 +14,13 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/produit')]
 class ProduitController extends AbstractController
 {
+    private $produitRepository;
+
+    public function __construct(ProduitRepository $produitRepository)
+    {
+        $this->produitRepository = $produitRepository;
+    }
+
     #[Route('/', name: 'app_produit_index', methods: ['GET'])]
     public function index(ProduitRepository $produitRepository): Response
     {
@@ -43,16 +50,28 @@ class ProduitController extends AbstractController
     }
 
     #[Route('/{produitreference}', name: 'app_produit_show', methods: ['GET'])]
-    public function show(Produit $produit): Response
+    public function show(int $produitreference): Response
     {
+        $produit = $this->produitRepository->find($produitreference);
+
+        if (!$produit) {
+            throw $this->createNotFoundException('Unable to find Produit with reference number ' . $produitreference);
+        }
+
         return $this->render('produit/show.html.twig', [
             'produit' => $produit,
         ]);
     }
 
     #[Route('/{produitreference}/edit', name: 'app_produit_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
+    public function edit(int $produitreference, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $produit = $this->produitRepository->find($produitreference);
+
+        if (!$produit) {
+            throw $this->createNotFoundException('Unable to find Produit with reference number ' . $produitreference);
+        }
+
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
 
@@ -68,14 +87,19 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route('/{produitreference}', name: 'app_produit_delete', methods: ['POST'])]
-    public function delete(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
+    #[Route('/{produitreference}/delete', name: 'app_produit_delete', methods: ['DELETE'])]
+    public function delete(int $produitreference, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$produit->getProduitreference(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($produit);
-            $entityManager->flush();
+        $produit = $this->produitRepository->find($produitreference);
+    
+        if (!$produit) {
+            throw $this->createNotFoundException('Unable to find Produit with reference number ' . $produitreference);
         }
-
+    
+        $entityManager->remove($produit);
+        $entityManager->flush();
+    
         return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
     }
+    
 }

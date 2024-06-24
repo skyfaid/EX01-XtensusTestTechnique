@@ -15,12 +15,12 @@ class ProduitType extends AbstractType
     {
         $builder
             ->add('produitlibelle')
-            ->add('produitdescription')
             ->add('unitereference', EntityType::class, [
                 'class' => Unite::class,
-'choice_label' => 'id',
+                'choice_label' => 'unitelibelle',
             ])
-        ;
+            ->add('produitdescription');
+            
     }
 
     public function configureOptions(OptionsResolver $resolver): void
