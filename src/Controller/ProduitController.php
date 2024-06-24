@@ -87,7 +87,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route('/{produitreference}/delete', name: 'app_produit_delete', methods: ['DELETE'])]
+    #[Route('/{produitreference}/delete', name: 'app_produit_delete', methods: ['DELETE'], csrf_protection: false)]
     public function delete(int $produitreference, EntityManagerInterface $entityManager): Response
     {
         $produit = $this->produitRepository->find($produitreference);
