@@ -826,6 +826,6 @@ class __TwigTemplate_223a27b01911b4d5f0e06de9e19a4c9e extends Template
         {% endif %}
     </div>
 {% endblock %}
-", "@WebProfiler/Collector/command.html.twig", "C:\\Users\\wajdi bouallegui\\Ex1\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\command.html.twig");
+", "@WebProfiler/Collector/command.html.twig", "C:\\Users\\wajdi bouallegui\\Desktop\\Day1\\EX01-XtensusTestTechnique\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\command.html.twig");
     }
 }

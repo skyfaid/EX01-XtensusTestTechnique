@@ -15,6 +15,14 @@ class ProduitRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Produit::class);
     }
+    public function findAllWithUnite()
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.unitereference', 'u')
+            ->addSelect('u') // Include Unite entity in the query
+            ->getQuery()
+            ->getResult();
+    }
 
 //    /**
 //     * @return Produit[] Returns an array of Produit objects

@@ -19,7 +19,7 @@
             <tr>
                 <td>{{ produit.produitreference }}</td>
                 <td>{{ produit.produitlibelle }}</td>
-                <td>{{ produit.produitdescription }}</td>
+                <td>{{ produit.unitereference.unitelibelle }}</td>
                 <td>
                     <a href="{{ path('app_produit_show', {'produitreference': produit.produitreference}) }}">show</a>
                     <a href="{{ path('app_produit_edit', {'produitreference': produit.produitreference}) }}">edit</a>

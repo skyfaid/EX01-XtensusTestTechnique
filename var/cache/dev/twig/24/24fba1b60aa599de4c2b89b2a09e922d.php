@@ -221,6 +221,6 @@ class __TwigTemplate_597ba6c18024d678b1f36f440a5313d3 extends Template
         {% block body %}{% endblock %}
     </body>
 </html>
-", "base.html.twig", "C:\\Users\\wajdi bouallegui\\Ex1\\templates\\base.html.twig");
+", "base.html.twig", "C:\\Users\\wajdi bouallegui\\Desktop\\Day1\\EX01-XtensusTestTechnique\\templates\\base.html.twig");
     }
 }
