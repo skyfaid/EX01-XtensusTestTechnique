@@ -54,7 +54,7 @@ class ProduitAPIController extends AbstractController
         return $this->json($produit, Response::HTTP_OK, [], ['groups' => 'produit:read']);
     }
 
-    #[Route('/', name: 'produit_new', methods: ['POST'])]
+    #[Route('/new', name: 'produit_new', methods: ['POST'])]
     public function new(Request $request): Response
     {
         $data = json_decode($request->getContent(), true);
@@ -86,7 +86,7 @@ class ProduitAPIController extends AbstractController
         return $this->json($produit, Response::HTTP_OK, [], ['groups' => 'produit:read']);
     }
 
-    #[Route('/{id}', name: 'produit_delete', methods: ['DELETE'])]
+    #[Route('/{id}/delete', name: 'produit_delete', methods: ['DELETE'])]
     public function delete(Produit $produit): Response
     {
         $this->entityManager->remove($produit);
