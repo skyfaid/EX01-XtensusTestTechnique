@@ -51,7 +51,18 @@ class ProduitAPIController extends AbstractController
     #[Route('/{id}', name: 'produit_show', methods: ['GET'])]
     public function show(Produit $produit): Response
     {
-        return $this->json($produit, Response::HTTP_OK, [], ['groups' => 'produit:read']);
+        // Fetch unite libelle for the produit
+        $unitelibelle = $produit->getUnitereference()->getUnitelibelle();
+
+        // Prepare data including unite libelle
+        $data = [
+            'produitreference' => $produit->getProduitreference(),
+            'produitlibelle' => $produit->getProduitlibelle(),
+            'produitdescription' => $produit->getProduitdescription(),
+            'unitelibelle' => $unitelibelle,
+        ];
+
+        return $this->json($data, Response::HTTP_OK);
     }
 
     #[Route('/new', name: 'produit_new', methods: ['POST'])]
