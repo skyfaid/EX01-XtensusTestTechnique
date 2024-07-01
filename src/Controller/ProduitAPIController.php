@@ -60,6 +60,7 @@ class ProduitAPIController extends AbstractController
             'produitlibelle' => $produit->getProduitlibelle(),
             'produitdescription' => $produit->getProduitdescription(),
             'unitelibelle' => $unitelibelle,
+            'unitereference'=>$produit->getUnitereference()->getUnitereference()
         ];
 
         return $this->json($data, Response::HTTP_OK);
@@ -88,7 +89,6 @@ class ProduitAPIController extends AbstractController
         $data = json_decode($request->getContent(), true);
         $produit->setProduitlibelle($data['produitlibelle']);
         $produit->setProduitdescription($data['produitdescription']);
-        // Assuming unitereference is an ID and you fetch the actual Unite entity
         $unitereference = $this->entityManager->getRepository(Unite::class)->find($data['unitereference']);
         $produit->setUnitereference($unitereference);
 
